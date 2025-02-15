@@ -1,12 +1,13 @@
+// 
+
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import axios from "axios";
 
 export default function MatchStatsPage() {
-  const router = useRouter();
-  const { id } = router.query;
+  const { id } = useParams(); // ✅ Get match ID from the URL
   const [stats, setStats] = useState([]);
   const [loading, setLoading] = useState(false);
   const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://live-sports-score-app.onrender.com";
@@ -50,7 +51,7 @@ export default function MatchStatsPage() {
       ) : (
         <p className="text-red-500 text-center">No statistics available.</p>
       )}
-      <button onClick={() => router.back()} className="mt-5 px-4 py-2 bg-blue-600 text-white rounded-lg">
+      <button onClick={() => window.history.back()} className="mt-5 px-4 py-2 bg-blue-600 text-white rounded-lg">
         🔙 Back to Matches
       </button>
     </div>
