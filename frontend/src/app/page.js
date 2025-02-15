@@ -10,9 +10,8 @@ export default function Home() {
   useEffect(() => {
     axios.get(API_URL)
       .then((response) => {
-        console.log("Full API Response:", response.data); // Debugging step
-        const matches = response.data.response || [];  // Access the correct array
-        setScores(matches);
+        console.log("API Response on Vercel:", response.data);  // Debugging step
+        setScores(response.data.response || []);
       })
       .catch((error) => {
         console.error("API Error:", error);
