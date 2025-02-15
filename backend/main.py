@@ -28,6 +28,7 @@ origins = [
     "http://localhost:3000",  # Next.js frontend (local development)
     "https://frontend-ikya79gjk-muhammads-projects-25abc4e7.vercel.app",  # Next.js frontend (production)
     "https://live-sports-score-app.onrender.com",  # FastAPI backend itself
+    "*", 
 ]
 
 app.add_middleware(
