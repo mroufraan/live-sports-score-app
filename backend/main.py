@@ -48,3 +48,10 @@ def get_live_scores():
     headers = {"x-apisports-key": "b46bb24f932952fc8b58b7305af7cdca"}
     response = requests.get("https://v3.football.api-sports.io/fixtures?live=all", headers=headers)
     return response.json()
+
+
+@app.get("/match-stats/{match_id}")
+def get_match_stats(match_id: int):
+    headers = {"x-apisports-key": "b46bb24f932952fc8b58b7305af7cdca"}
+    response = requests.get(f"https://v3.football.api-sports.io/fixtures/statistics?fixture={match_id}", headers=headers)
+    return response.json()

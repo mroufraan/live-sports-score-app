@@ -1,14 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 import LeagueTabs from "./components/LeagueTabs";
 
 export default function Home() {
+  const router = useRouter(); // ✅ Move this inside the function
   const [selectedLeague, setSelectedLeague] = useState(39); // Default: Premier League
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(false);
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://live-sports-score-app.onrender.com/live-scores";
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://live-sports-score-app.onrender.com";
 
   useEffect(() => {
     const fetchMatches = async () => {
@@ -39,7 +41,11 @@ export default function Home() {
           <p className="text-yellow-500 text-center">Loading matches...</p>
         ) : matches.length > 0 ? (
           matches.map((match, index) => (
-            <div key={index} className="bg-gray-200 dark:bg-gray-800 p-4 rounded-lg">
+            <div
+              key={index}
+              className="bg-gray-200 dark:bg-gray-800 p-4 rounded-lg cursor-pointer hover:shadow-lg transition"
+              onClick={() => router.push(`/match/${match.fixture.id}`)} // ✅ Now clickable
+            >
               <h2 className="text-xl font-semibold text-center">{match.league?.name}</h2>
               <div className="flex justify-between items-center mt-3">
                 <div className="flex items-center space-x-2">
